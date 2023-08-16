@@ -3,10 +3,10 @@ import { ParametersStruct } from '../typechain-types/contracts/WESaleFactory'
 
 async function main() {
   const routerAddresses = [
-    '0x017dAd2578372CAEE5c6CddfE35eEDB3728544C4', // syscoin
+    // '0x017dAd2578372CAEE5c6CddfE35eEDB3728544C4', // syscoin
     // '0x4dB158Eec5c5d63F9A09535882b835f36d3fd012', // rollux v3
-    // '0x4dB158Eec5c5d63F9A09535882b835f36d3fd012', // rollux testnet v3
-    // '0x29f7Ad37EC018a9eA97D4b3fEebc573b5635fA84', // rollux testnet v2
+    '0x4dB158Eec5c5d63F9A09535882b835f36d3fd012', // rollux testnet v3
+    '0x29f7Ad37EC018a9eA97D4b3fEebc573b5635fA84', // rollux testnet v2
     '0x0000000000000000000000000000000000000000',
   ]
 
@@ -38,18 +38,18 @@ async function main() {
     'complete grant routerSetter role to owner: dexRouterSetterBytes: ',
     dexRouterSetterBytes
   )
-  await sleep(600000)
+  await sleep(10000)
   for (let routerAddress of routerAddresses) {
     await wesaleFactory.grantRole(dexRouterBytes, routerAddress)
     console.log('complete grant router role to', dexRouterBytes, routerAddress)
   }
 
+  await sleep(10000)
   await wesaleFactory.grantRole(adminBytes, ownerAddress)
   console.log(
     'complete grant router role to routerAddress: adminRole: ',
     ownerAddress
   )
-  await sleep(1000)
   await wesaleFactory.transferOwnership(ownerAddress)
   console.log('transferOwnership: ', ownerAddress)
   //   await sleep(5000)
